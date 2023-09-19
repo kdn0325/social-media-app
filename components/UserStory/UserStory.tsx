@@ -3,7 +3,7 @@ import React from 'react';
 import {ITitle} from '../../types';
 import {styles} from './styles';
 
-const Title = ({title}: ITitle) => {
+const UserStory = ({title}: ITitle) => {
   return (
     <View>
       <Text style={styles.title}>{title}</Text>
@@ -11,4 +11,4 @@ const Title = ({title}: ITitle) => {
   );
 };
 
-export default Title;
+export default UserStory;
