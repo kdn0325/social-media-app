@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-               BuildableName = "socialMediaApp.app"
-               BlueprintName = "socialMediaApp"
-               ReferencedContainer = "container:socialMediaApp.xcodeproj">
+               BuildableName = "socialhub.app"
+               BlueprintName = "socialhub"
+               ReferencedContainer = "container:socialhub.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -33,9 +33,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "00E356ED1AD99517003FC87E"
-               BuildableName = "socialMediaAppTests.xctest"
-               BlueprintName = "socialMediaAppTests"
-               ReferencedContainer = "container:socialMediaApp.xcodeproj">
+               BuildableName = "socialhubTests.xctest"
+               BlueprintName = "socialhubTests"
+               ReferencedContainer = "container:socialhub.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -55,9 +55,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-            BuildableName = "socialMediaApp.app"
-            BlueprintName = "socialMediaApp"
-            ReferencedContainer = "container:socialMediaApp.xcodeproj">
+            BuildableName = "socialhub.app"
+            BlueprintName = "socialhub"
+            ReferencedContainer = "container:socialhub.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </LaunchAction>
@@ -72,9 +72,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-            BuildableName = "socialMediaApp.app"
-            BlueprintName = "socialMediaApp"
-            ReferencedContainer = "container:socialMediaApp.xcodeproj">
+            BuildableName = "socialhub.app"
+            BlueprintName = "socialhub"
+            ReferencedContainer = "container:socialhub.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

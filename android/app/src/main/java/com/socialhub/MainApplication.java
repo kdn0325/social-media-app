@@ -1,4 +1,4 @@
-package com.socialmediaapp;
+package com.socialhub;
 
 import android.app.Application;
 import com.facebook.react.PackageList;
