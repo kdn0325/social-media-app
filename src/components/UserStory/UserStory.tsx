@@ -1,12 +1,19 @@
 import { View, Text } from "react-native";
 import React from "react";
-import { styles } from "./styles";
-import { ITitle } from "@/interfaces";
+import { Image } from "react-native-svg";
+import { IUserStories } from "@/interfaces";
 
-const UserStory = ({ title }: ITitle) => {
+interface UserStoryProps {
+    profileImage: string; // profileImage의 타입을 명시적으로 지정
+    name: string;
+}
+
+const UserStory = ({ profileImage, name }: UserStoryProps) => {
+    console.log("profileImage?", profileImage);
     return (
         <View>
-            <Text style={styles.title}>{title}</Text>
+            <Image source={{ uri: profileImage }} />
+            <Text>{name}</Text>
         </View>
     );
 };

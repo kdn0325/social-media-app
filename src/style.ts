@@ -1,9 +1,12 @@
+import { getFontFamily } from "@assets/helper/herper";
 import { css } from "@emotion/native";
 
 export const styles = {
     header: css`
         flex: 1;
-        padding: 26px;
+        margin-left: 27px;
+        margin-right: 17px;
+        margin-top: 30px;
         flex-direction: row;
         justify-content: space-between;
     `,
@@ -22,14 +25,18 @@ export const styles = {
         align-items: center;
         justify-content: center;
         position: absolute;
-        right: 7px;
-        top: 10px;
+        right: 10px;
+        top: 12px;
     `,
     messageNumber: css`
         font-size: 6px;
-        font-family: "Inter";
+        font-family: ${getFontFamily("Inter", "600")};
         line-height: 7px;
-        font-weight: 600;
         color: #fff;
+    `,
+    userStoryContainer: css`
+        margin-top: 20px;
+        margin-left: 28px;
+        margin-right: 28px;
     `,
 };
