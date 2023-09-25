@@ -1,7 +1,10 @@
+import { ImageSourcePropType } from "react-native";
+
 export interface ITitle {
     title: string;
 }
 export interface IUserStories {
     name: string;
-    profileImage: any;
+    id?: number;
+    profileImage: ImageSourcePropType;
 }

@@ -3,9 +3,8 @@
     "include": [
         "src/**/*.ts",
         "src/**/*.tsx",
-        ".eslintrc.js",
-        "babel.config.js",
-        "@types/index.d.ts"
+        "@types/index.d.ts",
+        ".eslintrc.js"
     ],
     "compilerOptions": {
         "jsx": "react-native",

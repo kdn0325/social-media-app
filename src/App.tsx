@@ -1,5 +1,6 @@
 import {
     FlatList,
+    ImageSourcePropType,
     SafeAreaView,
     Text,
     TouchableOpacity,
@@ -12,57 +13,54 @@ import { faEnvelope } from "@fortawesome/free-solid-svg-icons";
 import { ScrollView } from "react-native";
 import { styles } from "./style";
 import UserStory from "@components/UserStory/UserStory";
-
-const defaultImage = require("../public/images/profile.png");
-console.log("profile?", defaultImage);
-console.log(typeof defaultImage);
+import defaultImage from "@assets/images/profile.png";
 
 const App = () => {
     const userStories = [
         {
             name: "abel1",
             id: 1,
-            profileImage: defaultImage,
+            profileImage: defaultImage as ImageSourcePropType,
         },
         {
             name: "abel2",
             id: 2,
-            profileImage: defaultImage,
+            profileImage: defaultImage as ImageSourcePropType,
         },
         {
             name: "abel3",
             id: 3,
-            profileImage: defaultImage,
+            profileImage: defaultImage as ImageSourcePropType,
         },
         {
             name: "abel4",
             id: 4,
-            profileImage: defaultImage,
+            profileImage: defaultImage as ImageSourcePropType,
         },
         {
             name: "abel5",
             id: 5,
-            profileImage: defaultImage,
+            profileImage: defaultImage as ImageSourcePropType,
         },
         {
             name: "abel6",
             id: 6,
-            profileImage: defaultImage,
+            profileImage: defaultImage as ImageSourcePropType,
         },
         {
             name: "abel7",
             id: 7,
-            profileImage: defaultImage,
+            profileImage: defaultImage as ImageSourcePropType,
         },
         {
             name: "abel8",
             id: 8,
-            profileImage: defaultImage,
+            profileImage: defaultImage as ImageSourcePropType,
         },
         {
             name: "abel9",
             id: 9,
-            profileImage: defaultImage,
+            profileImage: defaultImage as ImageSourcePropType,
         },
     ];
 
