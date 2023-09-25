@@ -8,3 +8,14 @@ export interface IUserStories {
     id?: number;
     profileImage: ImageSourcePropType;
 }
+export interface IUserPosts {
+    id?: number;
+    firstName: string;
+    lastName: string;
+    location: string;
+    profileImage: ImageSourcePropType;
+    postImage: ImageSourcePropType;
+    likes: number;
+    comments: number;
+    bookmarks: number;
+}
