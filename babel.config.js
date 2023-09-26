@@ -18,7 +18,7 @@ module.exports = {
                 ],
                 alias: {
                     "@": "./src",
-                    "@assets": "./src/assets", // 추가된 부분: public 경로에 대한 alias
+                    "@assets": "./src/assets",
                     "@components": "./src/components",
                     "@config": "./src/config",
                     "@hooks": "./src/hooks",
@@ -32,7 +32,7 @@ module.exports = {
                     "@data": "./src/data",
                     "@navigation": "./src/navigation",
                     "@store": "./src/store",
-                    "@public": "./public", // 추가된 부분: public 경로에 대한 alias
+                    "@public": "./public",
                 },
             },
         ],

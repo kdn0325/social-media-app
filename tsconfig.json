@@ -4,7 +4,8 @@
         "src/**/*.ts",
         "src/**/*.tsx",
         "@types/index.d.ts",
-        ".eslintrc.js"
+        ".eslintrc.js",
+        "babel.config.js"
     ],
     "compilerOptions": {
         "jsx": "react-native",

@@ -2,20 +2,24 @@ import {
     FlatList,
     ImageSourcePropType,
     SafeAreaView,
-    Text,
-    TouchableOpacity,
     View,
 } from "react-native";
 import React, { useEffect, useState } from "react";
 import Title from "@components/Title/Title";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import { faEnvelope } from "@fortawesome/free-solid-svg-icons";
-import { ScrollView } from "react-native";
-import { styles } from "./style";
+import {
+    Header,
+    MessageIcon,
+    MessageNumber,
+    MessageNumberContainer,
+    UserPostContainer,
+    UserStoryContainer,
+} from "./style";
 import UserStory from "@components/UserStory/UserStory";
 import defaultImage from "@assets/images/profile.png";
 import defaultPost from "@assets/images/post.png";
-import { IUserStories } from "./interfaces";
+import { IUserPosts, IUserStories } from "./interfaces";
 import UserPost from "@/components/UserPost/UserPost";
 
 const App = () => {
@@ -28,7 +32,7 @@ const App = () => {
     const [isLoadingUserStories, setIsLoadingUserStories] =
         useState<boolean>(false);
 
-    const userPostsPageSize: number = 4;
+    const userPostsPageSize: number = 2;
     const [userPostsCurrentPage, setUserPostsCurrentPage] = useState<number>(1);
     const [userPostsRenderedData, setUserPostsRenderedData] = useState<
         IUserPosts[]
@@ -37,10 +41,10 @@ const App = () => {
         useState<boolean>(false);
 
     const pagination = (
-        database: IUserStories[],
+        database: IUserStories[] | IUserPosts[],
         currentPage: number,
         pageSize: number,
-    ) => {
+    ): IUserStories[] | IUserPosts[] => {
         const startIndex = (currentPage - 1) * pageSize;
         const endIndex = startIndex + pageSize;
         if (startIndex >= database.length) {
@@ -201,77 +205,123 @@ const App = () => {
 
     useEffect(() => {
         setIsLoadingUserStories(true);
-        const getInitialData = pagination(userStories, 1, userStoriesPageSize);
-        setUserStoriesRenderedData(getInitialData);
+        const getInitialDataStory = pagination(
+            userStories,
+            1,
+            userStoriesPageSize,
+        ) as IUserStories[];
+        setUserStoriesRenderedData(getInitialDataStory);
         setIsLoadingUserStories(false);
+
+        setIsLoadingUserPosts(true);
+        const getInitialDataPost = pagination(
+            userPosts,
+            1,
+            userPostsPageSize,
+        ) as IUserPosts[];
+        setUserPostsRenderedData(getInitialDataPost);
+        setIsLoadingUserPosts(false);
     }, []);
 
     return (
         <SafeAreaView>
-            <View style={styles.header}>
-                <Title title={"Let's Explorer"} />
-                <TouchableOpacity style={styles.messageIco}>
-                    <FontAwesomeIcon
-                        icon={faEnvelope}
-                        size={20}
-                        color={"#898DAE"}
-                    />
-                    <View style={styles.messageNumberContainer}>
-                        <Text style={styles.messageNumber}>2</Text>
-                    </View>
-                </TouchableOpacity>
-            </View>
-            <View style={styles.userStoryContainer}>
-                <FlatList
-                    data={userStoriesRenderedData}
-                    renderItem={({ item }) => (
-                        <UserStory
-                            key={"userStory" + item.id}
-                            name={item.name}
-                            profileImage={item.profileImage}
-                        />
-                    )}
-                    horizontal={true}
-                    //스크롤 지점에 도달했을 때 실행할 함수를 정의
-                    onEndReached={() => {
-                        if (isLoadingUserStories) return;
-                        setIsLoadingUserStories(true);
-                        const contentToAppend = pagination(
-                            userStories,
-                            userStoriesCurrentPage + 1,
-                            userStoriesPageSize,
-                        );
-                        if (contentToAppend.length > 0) {
-                            setUserStoriesCurrentPage(
-                                userStoriesCurrentPage + 1,
-                            );
-                            setUserStoriesRenderedData((prev) => [
-                                ...prev,
-                                ...contentToAppend,
-                            ]);
-                        }
-                        console.log("끝");
-                    }}
-                    //onEndReached 함수를 실행시킬 스크롤의 지점을 정할 수 있다. 0이 출발지점 1이 끝지점이며, 보통 무한스크롤의 경우 중반 쯤 내려왔을 때 데이터를 불러오는 것이 자연스럽기 때문에 0.6으로 지정해주었다.
-
-                    onEndReachedThreshold={0.5}
-                    showsHorizontalScrollIndicator={false}
-                />
-            </View>
             <View>
                 <FlatList
-                    data={userPosts}
+                    //모든 항목의 상단에 렌더링
+                    ListHeaderComponent={
+                        <>
+                            <Header>
+                                <Title title={"Explorer"} />
+                                <MessageIcon>
+                                    <FontAwesomeIcon
+                                        icon={faEnvelope}
+                                        size={20}
+                                        color={"#898DAE"}
+                                    />
+                                    <MessageNumberContainer>
+                                        <MessageNumber>2</MessageNumber>
+                                    </MessageNumberContainer>
+                                </MessageIcon>
+                            </Header>
+                            <UserStoryContainer>
+                                <FlatList
+                                    showsHorizontalScrollIndicator={false} // 가로 스크롤 제거
+                                    data={userStoriesRenderedData}
+                                    renderItem={({ item }) => (
+                                        <UserStory
+                                            key={"userStory" + item.id}
+                                            name={item.name}
+                                            profileImage={item.profileImage}
+                                        />
+                                    )}
+                                    horizontal={true}
+                                    //스크롤 지점에 도달했을 때 실행할 함수를 정의
+                                    onEndReached={() => {
+                                        if (isLoadingUserStories) return;
+                                        setIsLoadingUserStories(true);
+                                        const contentToAppend = pagination(
+                                            userStories,
+                                            userStoriesCurrentPage + 1,
+                                            userStoriesPageSize,
+                                        );
+                                        if (contentToAppend.length > 0) {
+                                            setUserStoriesCurrentPage(
+                                                userStoriesCurrentPage + 1,
+                                            );
+                                            setUserStoriesRenderedData(
+                                                (prev: IUserStories[]) => [
+                                                    ...prev,
+                                                    ...(contentToAppend as IUserStories[]),
+                                                ],
+                                            );
+                                        }
+                                        console.log(
+                                            "스토리 fetch",
+                                            userPostsCurrentPage + 1,
+                                        );
+                                        setIsLoadingUserStories(false);
+                                    }}
+                                    //onEndReached 함수를 실행시킬 스크롤의 지점을 정할 수 있다. 0이 출발지점 1이 끝지점이며, 보통 무한스크롤의 경우 중반 쯤 내려왔을 때 데이터를 불러오는 것이 자연스럽기 때문에 0.6으로 지정해주었다.
+
+                                    onEndReachedThreshold={0.5}
+                                />
+                            </UserStoryContainer>
+                        </>
+                    }
+                    data={userPostsRenderedData}
+                    showsVerticalScrollIndicator={false} // 세로 스크롤 제거
+                    onEndReachedThreshold={0.5}
+                    onEndReached={() => {
+                        if (isLoadingUserPosts) return;
+                        setIsLoadingUserPosts(true);
+                        const contentToAppend = pagination(
+                            userPosts,
+                            userPostsCurrentPage + 1,
+                            userPostsPageSize,
+                        );
+                        if (contentToAppend.length > 0) {
+                            setUserPostsCurrentPage(userPostsCurrentPage + 1);
+                            setUserPostsRenderedData((prev: IUserPosts[]) => [
+                                ...prev,
+                                ...(contentToAppend as IUserPosts[]),
+                            ]);
+                        }
+                        setIsLoadingUserPosts(false);
+                        console.log("게시물 fetch", userPostsCurrentPage + 1);
+                    }}
                     renderItem={({ item }) => (
-                        <UserPost
-                            firstName={item.firstName}
-                            lastName={item.lastName}
-                            location={item.location}
-                            likes={item.likes}
-                            postImage={item.postImage}
-                            profileImage={item.profileImage}
-                            comments={item.comments}
-                            bookmarks={item.bookmarks}
-                        />
+                        <UserPostContainer>
+                            <UserPost
+                                firstName={item.firstName}
+                                lastName={item.lastName}
+                                location={item.location}
+                                likes={item.likes}
+                                postImage={item.postImage}
+                                profileImage={item.profileImage}
+                                comments={item.comments}
+                                bookmarks={item.bookmarks}
+                            />
+                        </UserPostContainer>
                     )}
                 />
             </View>

@@ -1,15 +1,13 @@
 import { getFontFamily } from "@assets/helper/herper";
-import { css } from "@emotion/native";
+import styled from "@emotion/native";
 
-export const styles = {
-    storyContainer: css`
-        margin-right: 20px;
-    `,
-    storyName: css`
-        font-family: ${getFontFamily("Inter", "500")};
-        font-size: 14px;
-        color: #022150;
-        margin-top: 8px;
-        text-align: center;
-    `,
-};
+export const StoryContainer = styled.View`
+    margin-right: 20px;
+`;
+export const StoryName = styled.Text`
+    font-family: ${getFontFamily("Inter", 500)};
+    font-size: 14px;
+    color: #022150;
+    margin-top: 8px;
+    text-align: center;
+`;

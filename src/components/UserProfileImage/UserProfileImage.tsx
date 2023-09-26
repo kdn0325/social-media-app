@@ -1,25 +1,24 @@
-import {
-    Image,
-    StyleProp,
-    ImageStyle,
-    ImageSourcePropType,
-    View,
-} from "react-native"; // 기본 Image 컴포넌트 사용
+import { ImageSourcePropType } from "react-native"; // 기본 Image 컴포넌트 사용
 import React from "react";
-import { styles } from "./styles";
+import { ProfileImage, UserProfileImageContainer } from "./styles";
 
 interface UserProfileImageProps {
-    profileImage: ImageSourcePropType; // 적절한 타입으로 변경
+    profileImage: ImageSourcePropType;
+    imageDimensions: number;
 }
 
-const UserProfileImage = ({ profileImage }: UserProfileImageProps) => {
+const UserProfileImage = ({
+    profileImage,
+    imageDimensions,
+}: UserProfileImageProps) => {
     return (
-        <View style={styles.storyImageContainer}>
-            <Image
-                style={styles.storyImage as StyleProp<ImageStyle>}
+        <UserProfileImageContainer borderRadius={imageDimensions}>
+            <ProfileImage
+                width={imageDimensions}
+                height={imageDimensions}
                 source={profileImage}
             />
-        </View>
+        </UserProfileImageContainer>
     );
 };
 
