@@ -231,7 +231,7 @@ const App = () => {
                     ListHeaderComponent={
                         <>
                             <Header>
-                                <Title title={"Explorer"} />
+                                <Title title={"Let's Explorer"} />
                                 <MessageIcon>
                                     <FontAwesomeIcon
                                         icon={faEnvelope}
